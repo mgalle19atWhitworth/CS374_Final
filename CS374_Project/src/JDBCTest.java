@@ -12,17 +12,16 @@ public class JDBCTest {
 			if (args.length > 0)
 				maxPrice = Double.parseDouble(args[0]);
 			
-			String stSQL = "SELECT C.Company, E.[Last Name] "
+			/*=String stSQL = "SELECT C.Company, E.[Last Name] "
                 + "FROM Customers C, Employees E, Orders O "
                 + "WHERE E.ID=O.[Employee ID] AND C.ID=O.[Customer ID] AND "
                 + "O.[Shipping Fee] < " + String.valueOf(maxPrice)
                 + " ORDER BY O.[Shipping Fee]";
-
-Connection conn = DriverManager.getConnection(
-     "jdbc:odbc:DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};" 
-	      + "DBQ=C:\\Users\\mgalle19\\Documents\\GitHub\\CS374_Final\\Final_Project_CS374.accdb;UID=Admin;PWD=;");
+	*/
+			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+			Connection conn = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\mgalle19\\Documents\\GitHub\\CS374_Final\\Final_Project_CS374.accdb");
 			Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			stmt.execute(stSQL);
+			//stmt.execute(stSQL);
 
 			ResultSet rs = stmt.getResultSet();
 			while (rs.next() == true) {
@@ -32,6 +31,9 @@ Connection conn = DriverManager.getConnection(
 		catch (Exception ex) {
 			System.out.println(String.format("Error: %s", ex.getMessage()));
 		}
+	}
+	public void menu(){
+		
 	}
 
 }
