@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class JDBCTest {
 
@@ -6,6 +7,8 @@ public class JDBCTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		int x = menu();
+		
 		try
 		{
 			double maxPrice = 20.0;
@@ -32,8 +35,25 @@ public class JDBCTest {
 			System.out.println(String.format("Error: %s", ex.getMessage()));
 		}
 	}
-	public void menu(){
-		
+	public static int menu(){
+		System.out.println("1. Look in Fridge");
+		System.out.println("2. Add to Fridge");
+		System.out.println("3. Delete from Fridge ");
+		System.out.println("4. Create Shopping list");
+		Scanner in = new Scanner(System.in);
+		int choice = 0;
+		choice = in.nextInt();
+		switch(choice){
+		case 1: choice = 1;
+			break;
+		case 2: choice = 2;
+			break;
+		case 3: choice = 3;
+			break;
+		case 4: choice = 4;
+			break;
+		}
+		return choice;
 	}
 
 }
