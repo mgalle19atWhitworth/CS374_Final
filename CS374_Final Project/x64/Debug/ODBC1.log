@@ -1,4 +1,0 @@
-﻿  main.cpp
-main.cpp(38): warning C4267: 'argument': conversion from 'size_t' to 'SQLSMALLINT', possible loss of data
-  ODBC1.vcxproj -> C:\Users\mgalle19\Documents\GitHub\CS374_Final\CS374_Final Project\x64\Debug\ODBC1.exe
-  ODBC1.vcxproj -> C:\Users\mgalle19\Documents\GitHub\CS374_Final\CS374_Final Project\x64\Debug\ODBC1.pdb (Full PDB)
