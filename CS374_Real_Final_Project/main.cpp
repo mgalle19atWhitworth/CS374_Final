@@ -185,7 +185,7 @@ string GetQuery() {
 string GetQuery2() {
 	string stSQl = "Select O.FoodName, R.TypeBrand ";
 	stSQl += "From Fridge R, Food O ";
-	stSQl += "Where ExpireDate = #12/14/17# AND O.ID = R.FoodID";
+	stSQl += "Where R.ExpireDate = #12/14/17# AND O.ID = R.FoodID";
 	return stSQl;
 }
 
