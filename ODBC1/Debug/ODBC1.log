@@ -1,5 +1,0 @@
-﻿  main.cpp
-c:\users\mgalle19\documents\github\cs374_final\odbc1\main.cpp(42): warning C4267: 'argument': conversion from 'size_t' to 'SQLSMALLINT', possible loss of data
-main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  ODBC1.vcxproj -> C:\Users\mgalle19\Documents\GitHub\CS374_Final\ODBC1\Debug\ODBC1.exe
-  ODBC1.vcxproj -> Debug\ODBC1.pdb (Full PDB)
