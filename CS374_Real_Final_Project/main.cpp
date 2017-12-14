@@ -7,7 +7,7 @@
 using namespace std;
 
 
-
+// Calls all query executions
 const int MAX_DATA=500;
 void query(float maxPrice);
 string GetQuery();
@@ -47,7 +47,7 @@ void query(float maxPrice) {
 	SQLCHAR szConnectOut[1024];
 	SQLSMALLINT cchConnect;
 	
-		
+		// Displays the menu where user can choose from
 		cout << "Please select an Option : \n";
 		cout << "1) Display all information about the food in the fridge.\n";
 		cout << "2) Display all food that will expire today.\n";
@@ -61,9 +61,9 @@ void query(float maxPrice) {
 		cout << endl;
 
 		cin >> x;
-		if (x == 0)
+		if (x == 0) // Assigns 0 as an arbitrary switch that exists program
 			break;
-
+		// creates a switch case for selection menu
 		switch (x) {
 		case 1: stSQL = GetQuery();
 			cout << setw(25) << "Name" << setw(25) << "Type" << setw(25) << "Group" << endl;
@@ -93,7 +93,7 @@ void query(float maxPrice) {
 		}
 
 
-
+		// Connecting to the database
 		string stConnect = "DRIVER={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=C:\\Users\\mgalle19\\Documents\\GitHub\\CS374_Final\\Final_Project_DB.accdb;UID=Admin;PWD=;";
 
 		rc = SQLDriverConnect(hdbc, NULL, (SQLCHAR *)stConnect.c_str(), stConnect.length(), szConnectOut, 1024, &cchConnect, SQL_DRIVER_NOPROMPT);
@@ -120,9 +120,10 @@ void query(float maxPrice) {
 		}
 
 			
-
+		// Sets the weight indents so the outcomes look more organized
 		while (rc == SQL_SUCCESS) {
 			rc = SQLFetch(hstmt);
+			// If query 1 or 8 :: Display the set weight of 25
 			if (x == 1 || x == 8) {
 				if (SQLGetData(hstmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData) == SQL_SUCCESS)
 					cout << setw(25);
@@ -133,7 +134,7 @@ void query(float maxPrice) {
 				if (SQLGetData(hstmt, 3, SQL_C_CHAR, szData, sizeof(szData), &cbData) == SQL_SUCCESS)
 					cout << setw(25);
 				 cout << szData;
-			}
+			} // If query 2 or 3 :: Display the set weight of 25
 			else if (x == 2 || x == 3) {
 				if (SQLGetData(hstmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData) == SQL_SUCCESS)
 					cout << setw(25);
@@ -142,14 +143,14 @@ void query(float maxPrice) {
 					cout << setw(25);
 					cout << szData;
 				}
-			}
+			} // If query 4, 5, or 6 :: Display the set weight of 50
 			else if (x == 4 || x == 5 || x == 6) {
 				if (SQLGetData(hstmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData) == SQL_SUCCESS) {
 					cout << setw(50);
 					cout << szData;
 				}
 			}
-		
+			// If query 7 :: Display the set weight differs depending on the data size
 			else if (x == 7) {
 				if (SQLGetData(hstmt, 1, SQL_C_CHAR, szData, sizeof(szData), &cbData) == SQL_SUCCESS)
 					cout << setw(25);
@@ -172,6 +173,7 @@ void query(float maxPrice) {
 	}
 }
 
+// Displays all items in the fridge
 string GetQuery() {
 	string stSQL = "SELECT O.FoodName, O.FoodType, O.FoodGroup ";
 	stSQL += "FROM Fridge R, Food O ";
@@ -179,6 +181,7 @@ string GetQuery() {
 	return stSQL;
 }
 
+// Displays all items that will expire before 12/14/2017
 string GetQuery2() {
 	string stSQl = "Select O.FoodName, R.TypeBrand ";
 	stSQl += "From Fridge R, Food O ";
@@ -186,6 +189,7 @@ string GetQuery2() {
 	return stSQl;
 }
 
+// Displays all items that are GMO
 string GetQuery3() {
 	string stSQL = "SELECT O.FoodName, R.Quality ";
 	stSQL += "From Fridge R, Food O ";
@@ -193,6 +197,7 @@ string GetQuery3() {
 	return stSQL;
 }
 
+// Displays all items in freezer
 string GetQuery4() {
 	string stSQL = "SELECT O.FoodName ";
 	stSQL += "FROM Fridge R, Food O ";
@@ -200,7 +205,7 @@ string GetQuery4() {
 	return stSQL;
 }
 
-
+// Displays all items that are gluten-free
 string GetQuery5() {
 	string stSQL = "SELECT FoodName ";
 	stSQL += "FROM Food O ";
@@ -208,6 +213,7 @@ string GetQuery5() {
 	return stSQL;
 }
 
+// Displays all items that contain nuts
 string GetQuery6() {
 	string stSQL = "SELECT FoodName ";
 	stSQL += "FROM Food O ";
@@ -215,6 +221,7 @@ string GetQuery6() {
 	return stSQL;
 }
 
+// Displays all location in which soda can be found
 string GetQuery7() {
 	string stSQL = "SELECT L.Name, L.Address,L.Aisle ";
 	stSQL += "FROM Location L, Food O ";
@@ -222,6 +229,7 @@ string GetQuery7() {
 	return stSQL;
 }
 
+// Displays all items that expire before 12/20/17 or has a quantity less than 3 in the fridge into the grocery-shopping list.
 string GetQuery8() {
 	string stSQL = "Select O.FoodName, R.ExpireDate, R.Quantity ";
 	stSQL += "From Food O, Fridge R ";
